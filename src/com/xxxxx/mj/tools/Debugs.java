@@ -10,7 +10,7 @@ import java.util.Date;
 import android.util.Log;
 
 public class Debugs {
-	public static boolean LogFlag = true;
+	public static boolean LogFlag = false;
 	public static String LogTag = ConstVar.CAPTION;
 	public static SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static boolean createLogFlag = false;
