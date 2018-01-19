@@ -27,9 +27,6 @@ import android.os.AsyncTask;
 
 public class HotUpdate {
 
-    // URL for json
-    public String jsonUrl = ConstVar.UPDATE_URL + "nowT=" + System.currentTimeMillis() + "&game=" + ConstVar.CAPTION + "&v=" + ConstVar.VERSIONCODE;
-
     // zip path
     private String zipPath;
     // save path
@@ -51,7 +48,7 @@ public class HotUpdate {
     public void doLoadGame() {
         zipPath = context.getApplicationContext().getFilesDir().getAbsolutePath();
         gamePath = zipPath + "/egret/" + gameId + "/game";
-        HotUpdateTask task = new HotUpdateTask(jsonUrl, zipPath, gamePath);
+        HotUpdateTask task = new HotUpdateTask(ConstVar.UPDATE_URL, zipPath, gamePath);
         task.execute();
     }
 

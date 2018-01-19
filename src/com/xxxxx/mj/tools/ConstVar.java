@@ -5,13 +5,9 @@ public class ConstVar{
 	//app文件地址
 	public static String filePath = "";
 	//版本校验地址
-	public static final String VERSION_CHECK 	= "http://ver.0710mj.com/ver/apk/version.php?game="+ConstVar.CAPTION + "&nowT=" + System.currentTimeMillis();
-//	//版本校验测试地址
-//	public final static String VERSION_CHECK 	= "http://test.0710mj.com/ver/apk/version.php?game="+ConstVar.CAPTION;
+	public static final String VERSION_CHECK 	= "http://mogumj.com/update/version.lua?game="+ConstVar.CAPTION;
 	//版本号
-	public static String VERSION 			= "1.0";
-	//版本号
-	public static String VERSIONCODE 			= String.valueOf((int)(Float.parseFloat(ConstVar.VERSION) * 10));
+	public static String VERSIONCODE 			= "1";
 	//游戏名称
 	public static final String CAPTION 			= "xinhe";
 	//更新开关
@@ -25,9 +21,7 @@ public class ConstVar{
 	//egret gameId
 	public static String gameId = "local";
 	//热更新地址
-	public static final String UPDATE_URL 		= "http://mogumj.com/update/update.php?";
-//	public static final String UPDATE_URL 		= "http://ver.0710mj.com/ver/apk/egret.fzmj.php?";
-//	public static final String UPDATE_URL 		= "http://ver.lgyouxi.cn/h5_gzmj/egret.php?";
+	public static final String UPDATE_URL = "http://mogumj.com/update/update.php?" + "game=" + ConstVar.CAPTION + "&v=" + ConstVar.VERSIONCODE + "&platform=android";
 	//自定义热更新开关
 	public static final boolean UseCustomHotUpdate = false;
 	//loading开关

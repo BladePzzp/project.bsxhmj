@@ -151,9 +151,8 @@ public class EntryActivity extends Activity implements UpdateListener {
     private void getAppInfo() {
     	try {
 			String pkName = this.getPackageName();
-			ConstVar.VERSION = this.getPackageManager().getPackageInfo(pkName, 0).versionName;
-			ConstVar.VERSIONCODE = String.valueOf((int)(Float.parseFloat(ConstVar.VERSION) * 10));
-			Debugs.debug("getAppInfo , version = " +  ConstVar.VERSION + " versioncode = " + ConstVar.VERSIONCODE);
+			ConstVar.VERSIONCODE = this.getPackageManager().getPackageInfo(pkName, 0).versionCode + "";
+			Debugs.debug("getAppInfo ,versioncode = " + ConstVar.VERSIONCODE);
 		} catch (Exception e) {
 			// TODO: handle exception
 			Debugs.debug("getAppInfo exception, e = " +  egretRoot.toString());
@@ -491,7 +490,7 @@ public class EntryActivity extends Activity implements UpdateListener {
             // 请求网络zip包发布模式，需要权限 INTERNET
 //            loaderUrl = "http://www.example.com/" + EGRET_PUBLISH_ZIP;
 //            updateUrl = "http://www.example.com/";
-        	loaderUrl = ConstVar.UPDATE_URL + "nowT=" + System.currentTimeMillis() + "&game=" + ConstVar.CAPTION + "&v=" + ConstVar.VERSIONCODE;
+        	loaderUrl = ConstVar.UPDATE_URL;
         	updateUrl = "";
             break;
         default:
@@ -879,12 +878,12 @@ public class EntryActivity extends Activity implements UpdateListener {
         	if(versionInfo != null){
         		String info[] = versionInfo.split(" ");
         		if(info.length > 1){
-        			Debugs.debug("info[0] = " + info[0] + " info[1] = " + info[1] + "current_version = " + ConstVar.VERSION);
+        			Debugs.debug("info[0] = " + info[0] + " info[1] = " + info[1] + "current_version = " + ConstVar.VERSIONCODE);
         			info[0] = info[0].trim();
             		info[1] = info[1].trim();
             		server_version = info[0];
             		low_version = info[1];
-            		if((0 == Float.compare(Float.valueOf(server_version), 0.0f)) || (0 == Float.compare(Float.valueOf(low_version), 0.0f))){
+            		if((0 == Integer.valueOf(server_version)) || (0 == Integer.valueOf(low_version))){
             			Debugs.debug("获取更新内容不合法!");
             			getVersion = null;
                     	versionInfo = null;
@@ -896,7 +895,7 @@ public class EntryActivity extends Activity implements UpdateListener {
                     	}
                     	return;
             		}
-            		if(info[0] != null && (Float.compare(Float.valueOf(ConstVar.VERSION),Float.valueOf(server_version)) >= 0)){
+            		if(info[0] != null && (Integer.valueOf(ConstVar.VERSIONCODE) >= Integer.valueOf(server_version))){
             			//不需要更新
             			loginState = 2;
             		}else{
@@ -1270,8 +1269,8 @@ public class EntryActivity extends Activity implements UpdateListener {
 		// TODO Auto-generated method stub
 		//判断是不是必须更新的
 		try{
-			Debugs.debug("low_version = " + low_version + " ConstVar.Version + " + ConstVar.VERSION);
-			if(Float.valueOf(low_version) > Float.valueOf(ConstVar.VERSION)){
+			Debugs.debug("low_version = " + low_version + " ConstVar.Version + " + ConstVar.VERSIONCODE);
+			if(Float.valueOf(low_version) > Float.valueOf(ConstVar.VERSIONCODE)){
 				Util.makeToast(this, "本地版本号低于当前最低版本号,必须更新客户端", Toast.LENGTH_LONG, true);
 				Thread.sleep(2000);
 				//关闭登陆窗体
