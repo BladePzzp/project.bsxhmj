@@ -5,13 +5,13 @@ public class ConstVar{
 	//app文件地址
 	public static String filePath = "";
 	//版本校验地址
-	public static final String VERSION_CHECK 	= "http://mogumj.com/update/version.lua?game="+ConstVar.CAPTION;
+	public static final String VERSION_CHECK 	= "http://mogumj.com/version.lua?game="+ConstVar.CAPTION;
 	//版本号
 	public static String VERSIONCODE 			= "1";
 	//游戏名称
 	public static final String CAPTION 			= "xinhe";
 	//更新开关
-	public static final boolean update 			= false;
+	public static final boolean update 			= true;
 	//egret 根目录
 	public static final String EGRET_ROOT = "egret";
 	//TODO: egret publish之后，修改以下常量为生成的game_code名(本地zip包)

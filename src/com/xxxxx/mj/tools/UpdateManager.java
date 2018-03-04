@@ -185,26 +185,35 @@ public class UpdateManager {
 				int size = getApkFileSize();
 				String apkFile = saveFileName;
 				File ApkFile = new File(apkFile);
-//				//下载前先删除之前下载的旧文件
-//				if(ApkFile.exists() && ApkFile.isFile()){
-//					ApkFile.delete();
-//				}
+				//下载前先删除之前下载的旧文件
+				if(ApkFile.exists() && ApkFile.isFile()){
+					ApkFile.delete();
+				}
 				int saveFileLength = (int) ApkFile.length();
 				if(saveFileLength < size){
+
+
 					URL url = new URL(apkUrl);
-					
-					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-					conn.setDoInput(true);
-					conn.setDoOutput(true);
-					conn.setUseCaches(false);
-					conn.setRequestProperty("Accept-Encoding", "identity");
-					conn.setRequestProperty("Range", "bytes=" + saveFileLength + "-" + (size - 1));
-					conn.setConnectTimeout(10000);
-					conn.setReadTimeout(5000);
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestMethod("GET");
+					conn.setConnectTimeout(5000);
+					conn.setRequestProperty("Connection", "Keep-Alive");
 					conn.connect();
+
+//					URL url = new URL(apkUrl);
+//					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+//					conn.setRequestMethod("GET");
+//					conn.setDoInput(true);
+//					conn.setDoOutput(true);
+//					conn.setUseCaches(false);
+//					conn.setRequestProperty("Accept-Encoding", "identity");
+//					conn.setRequestProperty("Range", "bytes=" + saveFileLength + "-" + (size - 1));
+//					conn.setConnectTimeout(10000);
+//					conn.setReadTimeout(5000);
+//					conn.connect();
 					
 					int length = conn.getContentLength();
-					Debugs.debug("文件大小是:" + length);
+					Debugs.debug("文件大小是:" + length + " saveFileLength: " + saveFileLength);
 					if(-1 != length){
 						InputStream is = conn.getInputStream();
 						RandomAccessFile fos = new RandomAccessFile(ApkFile,"rwd");
